@@ -1,6 +1,6 @@
 ---
 import { Image } from "astro:assets";
-import fullBeef from "../assets/full-beef.png";
+import heroImage from "../assets/hero/cattle-pasture.jpg";
 ---
 
 <section class="relative overflow-hidden bg-surface-soft">
@@ -61,8 +61,8 @@ import fullBeef from "../assets/full-beef.png";
           <div class="absolute inset-0 bg-gradient-to-br from-pasture/5 to-gold/10 rounded-[2.5rem] rotate-3"></div>
           <div class="relative aspect-square bg-white rounded-[2.5rem] shadow-2xl shadow-pasture/10 ring-1 ring-black/5 overflow-hidden">
             <Image
-              src={fullBeef}
-              alt="Full grass-fed beef share — Coopers Grass Fed Beef"
+              src={heroImage}
+              alt="Coopers cattle grazing on open pasture — 100% grass-fed"
               class="w-full h-full object-cover"
               loading="eager"
               widths={[400, 800, 1200]}
