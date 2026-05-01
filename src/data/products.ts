@@ -2,6 +2,7 @@ import fullBeef from "../assets/full-beef.png";
 import halfBeef from "../assets/half-beef.png";
 import quarterBeef from "../assets/quarter-beef.png";
 import eighthBeef from "../assets/eighth-beef.png";
+import pigCuts from "../assets/products/pig-cuts.jpg";
 import type { ImageMetadata } from "astro";
 
 export type Product = {
@@ -63,23 +64,23 @@ export const products: Product[] = [
   {
     slug: "full-pig",
     name: "Full Pig",
-    price: "Pricing soon",
+    price: "$1,500",
     weight: "~120–160 lbs",
     shortDesc: "Whole pasture-raised pork share. Cut to your specifications.",
     longDesc:
       "Approximately 120–160 lbs of pasture-raised pork, vacuum-sealed and flash-frozen. Includes pork chops, bacon, ham, pork shoulder, ribs, sausage, ground pork, tenderloin, and lard. Cut to your specifications. Whole-animal share — perfect for families filling a freezer for the year.",
-    image: null,
-    available: false,
+    image: pigCuts,
+    available: true,
   },
   {
     slug: "half-pig",
     name: "1/2 Pig",
-    price: "Pricing soon",
+    price: "$800",
     weight: "~60–80 lbs",
     shortDesc: "Half pasture-raised pork share. Premium pork without the full hog.",
     longDesc:
       "Approximately 60–80 lbs of pasture-raised pork. Includes pork chops, bacon, ham, pork shoulder, ribs, sausage, ground pork, and tenderloin. Half-share for the family that wants premium pork without committing to a full hog.",
-    image: null,
-    available: false,
+    image: pigCuts,
+    available: true,
   },
 ];
