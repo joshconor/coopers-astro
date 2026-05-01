@@ -1,0 +1,63 @@
+---
+import { Image } from "astro:assets";
+import { products } from "../data/products";
+---
+
+<section id="shop" class="py-20 md:py-32 bg-surface-soft">
+  <div class="max-w-7xl mx-auto px-5 md:px-8">
+    <div class="reveal max-w-2xl mb-12 md:mb-16">
+      <div class="text-[13px] font-semibold uppercase tracking-[0.18em] text-gold mb-3">Our Shares</div>
+      <h2 class="font-sans font-bold text-[clamp(2rem,4.5vw,3.5rem)] tracking-tight text-pasture leading-[1.05]">
+        Pick the share<br />that fits your freezer.
+      </h2>
+      <p class="mt-5 text-[17px] text-ink-muted leading-relaxed">
+        Every share is whole-animal. Vacuum-sealed, flash-frozen, and shipped nationwide. A $500 deposit reserves your animal and locks your price.
+      </p>
+    </div>
+
+    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5 md:gap-7">
+      {products.map((p) => (
+        <article class="reveal group bg-white rounded-3xl overflow-hidden ring-1 ring-black/5 hover:ring-pasture/20 hover:shadow-2xl hover:shadow-pasture/10 transition-all duration-500 flex flex-col">
+          <div class="aspect-square bg-surface-soft relative overflow-hidden">
+            {p.image ? (
+              <Image
+                src={p.image}
+                alt={`${p.name} — 100% grass fed beef from Coopers`}
+                class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700"
+                widths={[400, 600, 800]}
+                sizes="(max-width: 640px) 90vw, (max-width: 1024px) 45vw, 30vw"
+              />
+            ) : (
+              <div class="w-full h-full flex items-center justify-center text-ink-muted/40">
+                <div class="text-center">
+                  <svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" class="mx-auto mb-2"><circle cx="12" cy="12" r="10"/><path d="M12 6v6l4 2"/></svg>
+                  <div class="text-[12px]">Photo coming soon</div>
+                </div>
+              </div>
+            )}
+            {!p.available && (
+              <div class="absolute top-4 right-4 bg-white/90 backdrop-blur text-pasture text-[11px] font-semibold uppercase tracking-wider px-3 py-1 rounded-full ring-1 ring-black/5">
+                Coming soon
+              </div>
+            )}
+          </div>
+          <div class="p-6 md:p-7 flex-1 flex flex-col">
+            <div class="flex items-baseline justify-between mb-2 gap-3">
+              <h3 class="font-sans font-bold text-[22px] text-ink">{p.name}</h3>
+              <div class="text-pasture font-bold text-[20px] whitespace-nowrap">{p.price}</div>
+            </div>
+            <div class="text-[13px] text-ink-muted mb-4">{p.weight}</div>
+            <p class="text-[15px] text-ink-muted leading-relaxed flex-1">{p.shortDesc}</p>
+            <a
+              href="#order"
+              class="mt-6 inline-flex items-center justify-center font-semibold text-[14px] text-pasture hover:text-gold transition group/cta"
+            >
+              {p.available ? "Order this share" : "Notify me"}
+              <span class="ml-1 group-hover/cta:translate-x-1 transition-transform">→</span>
+            </a>
+          </div>
+        </article>
+      ))}
+    </div>
+  </div>
+</section>

@@ -1,0 +1,94 @@
+---
+import { products } from "../data/products";
+---
+
+<section id="order" class="py-20 md:py-32 bg-pasture relative overflow-hidden">
+  <div class="absolute -top-40 -right-40 w-[600px] h-[600px] bg-gold/15 rounded-full blur-3xl pointer-events-none"></div>
+  <div class="absolute -bottom-40 -left-40 w-[500px] h-[500px] bg-white/5 rounded-full blur-3xl pointer-events-none"></div>
+
+  <div class="relative max-w-3xl mx-auto px-5 md:px-8">
+    <div class="reveal text-center mb-10 md:mb-14">
+      <div class="text-[13px] font-semibold uppercase tracking-[0.18em] text-gold mb-3">Order Inquiry</div>
+      <h2 class="font-sans font-bold text-[clamp(2rem,4.5vw,3.5rem)] tracking-tight text-white leading-[1.05]">
+        Reserve your share.
+      </h2>
+      <p class="mt-5 text-[17px] text-white/75 max-w-xl mx-auto leading-relaxed">
+        Submit the form below. We'll reply within 1 hour during business hours with payment instructions for your selected method.
+      </p>
+    </div>
+
+    <form
+      class="reveal bg-white rounded-3xl p-6 md:p-10 shadow-2xl shadow-black/20 space-y-5"
+      action="https://formspree.io/f/REPLACE_ME"
+      method="POST"
+    >
+      <input type="text" name="_gotcha" tabindex="-1" autocomplete="off" class="hidden" />
+      <input type="hidden" name="_subject" value="New Coopers Order Inquiry" />
+
+      <div class="grid md:grid-cols-2 gap-5">
+        <label class="block">
+          <span class="text-[13px] font-semibold text-ink">Full name *</span>
+          <input required type="text" name="name" class="mt-1.5 w-full rounded-xl border border-black/10 bg-surface-soft px-4 py-3 text-[15px] text-ink focus:border-pasture focus:bg-white focus:ring-2 focus:ring-pasture/20 outline-none transition" />
+        </label>
+        <label class="block">
+          <span class="text-[13px] font-semibold text-ink">Email *</span>
+          <input required type="email" name="email" class="mt-1.5 w-full rounded-xl border border-black/10 bg-surface-soft px-4 py-3 text-[15px] text-ink focus:border-pasture focus:bg-white focus:ring-2 focus:ring-pasture/20 outline-none transition" />
+        </label>
+      </div>
+
+      <label class="block">
+        <span class="text-[13px] font-semibold text-ink">Phone *</span>
+        <input required type="tel" name="phone" class="mt-1.5 w-full rounded-xl border border-black/10 bg-surface-soft px-4 py-3 text-[15px] text-ink focus:border-pasture focus:bg-white focus:ring-2 focus:ring-pasture/20 outline-none transition" />
+      </label>
+
+      <label class="block">
+        <span class="text-[13px] font-semibold text-ink">Delivery address *</span>
+        <input required type="text" name="street" placeholder="Street" class="mt-1.5 w-full rounded-xl border border-black/10 bg-surface-soft px-4 py-3 text-[15px] text-ink focus:border-pasture focus:bg-white focus:ring-2 focus:ring-pasture/20 outline-none transition" />
+        <div class="grid grid-cols-2 md:grid-cols-3 gap-3 mt-3">
+          <input required type="text" name="city" placeholder="City" class="rounded-xl border border-black/10 bg-surface-soft px-4 py-3 text-[15px] text-ink focus:border-pasture focus:bg-white focus:ring-2 focus:ring-pasture/20 outline-none transition" />
+          <input required type="text" name="state" placeholder="State" class="rounded-xl border border-black/10 bg-surface-soft px-4 py-3 text-[15px] text-ink focus:border-pasture focus:bg-white focus:ring-2 focus:ring-pasture/20 outline-none transition" />
+          <input required type="text" name="zip" placeholder="ZIP" class="col-span-2 md:col-span-1 rounded-xl border border-black/10 bg-surface-soft px-4 py-3 text-[15px] text-ink focus:border-pasture focus:bg-white focus:ring-2 focus:ring-pasture/20 outline-none transition" />
+        </div>
+      </label>
+
+      <div class="grid md:grid-cols-2 gap-5">
+        <label class="block">
+          <span class="text-[13px] font-semibold text-ink">Product *</span>
+          <select required name="product" class="mt-1.5 w-full rounded-xl border border-black/10 bg-surface-soft px-4 py-3 text-[15px] text-ink focus:border-pasture focus:bg-white focus:ring-2 focus:ring-pasture/20 outline-none transition">
+            <option value="">Choose a share…</option>
+            {products.map((p) => (
+              <option value={p.name}>{p.name} — {p.price}</option>
+            ))}
+          </select>
+        </label>
+        <label class="block">
+          <span class="text-[13px] font-semibold text-ink">Quantity *</span>
+          <input required type="number" name="quantity" min="1" value="1" class="mt-1.5 w-full rounded-xl border border-black/10 bg-surface-soft px-4 py-3 text-[15px] text-ink focus:border-pasture focus:bg-white focus:ring-2 focus:ring-pasture/20 outline-none transition" />
+        </label>
+      </div>
+
+      <label class="block">
+        <span class="text-[13px] font-semibold text-ink">Preferred payment method *</span>
+        <select required name="payment_method" class="mt-1.5 w-full rounded-xl border border-black/10 bg-surface-soft px-4 py-3 text-[15px] text-ink focus:border-pasture focus:bg-white focus:ring-2 focus:ring-pasture/20 outline-none transition">
+          <option value="">Choose one…</option>
+          <option>Zelle</option>
+          <option>Cash App</option>
+          <option>Apple Pay</option>
+          <option>Cash</option>
+        </select>
+      </label>
+
+      <label class="block">
+        <span class="text-[13px] font-semibold text-ink">Notes / special requests</span>
+        <textarea name="notes" rows="4" class="mt-1.5 w-full rounded-xl border border-black/10 bg-surface-soft px-4 py-3 text-[15px] text-ink focus:border-pasture focus:bg-white focus:ring-2 focus:ring-pasture/20 outline-none transition resize-none"></textarea>
+      </label>
+
+      <button type="submit" class="w-full bg-pasture text-white font-semibold py-4 rounded-full hover:bg-pasture-dark transition shadow-lg shadow-pasture/30">
+        Submit Order Inquiry
+      </button>
+      <p class="text-center text-[13px] text-ink-muted">
+        We'll reply within 1 hour during business hours with payment instructions.
+      </p>
+    </form>
+  </div>
+</section>
