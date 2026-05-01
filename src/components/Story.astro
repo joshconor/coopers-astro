@@ -1,7 +1,20 @@
 ---
+import { Image } from "astro:assets";
+import storyBg from "../assets/farm/cattle-grazing.jpg";
 ---
 
-<section id="story" class="py-20 md:py-32 bg-white relative overflow-hidden">
+<section id="story" class="py-20 md:py-32 relative overflow-hidden bg-white">
+  <!-- Background photo -->
+  <Image
+    src={storyBg}
+    alt=""
+    class="absolute inset-0 w-full h-full object-cover"
+    widths={[1200, 1920, 2400]}
+    sizes="100vw"
+    aria-hidden="true"
+  />
+  <!-- Cream overlay so text stays readable -->
+  <div class="absolute inset-0 bg-gradient-to-b from-white/75 via-white/70 to-white/80 pointer-events-none"></div>
   <div class="absolute top-1/2 left-0 w-[400px] h-[400px] bg-gold/5 rounded-full blur-3xl pointer-events-none"></div>
 
   <div class="max-w-4xl mx-auto px-5 md:px-8 relative">
