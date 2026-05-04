@@ -64,7 +64,7 @@ export const products: Product[] = [
   {
     slug: "full-pig",
     name: "Full Pig",
-    price: "$1,500",
+    price: "$900",
     weight: "~120–160 lbs",
     shortDesc: "Whole pasture-raised pork share. Cut to your specifications.",
     longDesc:
@@ -75,7 +75,7 @@ export const products: Product[] = [
   {
     slug: "half-pig",
     name: "1/2 Pig",
-    price: "$800",
+    price: "$500",
     weight: "~60–80 lbs",
     shortDesc: "Half pasture-raised pork share. Premium pork without the full hog.",
     longDesc:
