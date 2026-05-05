@@ -59,18 +59,17 @@ import { products } from "../data/products";
             <div class="text-[13px] text-ink-muted mb-4">{p.weight}</div>
             <p class="text-[15px] text-ink-muted leading-relaxed flex-1">{p.shortDesc}</p>
 
-            <div class="mt-6 flex flex-col sm:flex-row sm:items-center sm:justify-between gap-3">
+            <div class="mt-6 flex flex-col sm:flex-row gap-3">
               <button
                 type="button"
                 data-product-trigger={p.slug}
-                class="inline-flex items-center font-semibold text-[14px] text-pasture hover:text-gold transition group/cta self-start"
+                class="inline-flex items-center justify-center bg-surface-soft text-pasture font-semibold text-[13px] px-4 py-2 rounded-full hover:bg-black/5 transition w-full sm:flex-1"
               >
                 What's inside
-                <span class="ml-1 group-hover/cta:translate-x-1 transition-transform">→</span>
               </button>
               <a
                 href="#order"
-                class="inline-flex items-center justify-center bg-pasture text-white font-semibold text-[13px] px-4 py-2 rounded-full hover:bg-pasture-dark transition self-start sm:self-auto"
+                class="inline-flex items-center justify-center bg-pasture text-white font-semibold text-[13px] px-4 py-2 rounded-full hover:bg-pasture-dark transition w-full sm:flex-1"
               >
                 {p.available ? "Order this share" : "Notify me"}
               </a>
