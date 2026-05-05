@@ -3,69 +3,77 @@ import { Image } from "astro:assets";
 import heroImage from "../assets/hero/cattle-pasture.jpg";
 ---
 
-<section class="relative bg-surface-soft overflow-hidden">
-  <!-- Full-bleed photo banner -->
-  <div class="reveal w-full">
-    <Image
-      src={heroImage}
-      alt="Coopers cattle grazing on open pasture — 100% grass-fed"
-      class="w-full h-auto block"
-      loading="eager"
-      fetchpriority="high"
-      decoding="async"
-      widths={[768, 1280, 1920, 2400]}
-      sizes="100vw"
-    />
-  </div>
+<section class="relative overflow-hidden min-h-[88vh] md:min-h-[90vh] flex items-center justify-center">
+  <!-- Background photo -->
+  <Image
+    src={heroImage}
+    alt="Coopers cattle grazing on open pasture — 100% grass-fed"
+    class="absolute inset-0 w-full h-full object-cover"
+    loading="eager"
+    fetchpriority="high"
+    decoding="async"
+    widths={[768, 1280, 1920, 2400]}
+    sizes="100vw"
+  />
 
-  <!-- Decorative gradients -->
-  <div class="absolute -top-32 -right-32 w-[600px] h-[600px] bg-gold/10 rounded-full blur-3xl pointer-events-none"></div>
-  <div class="absolute -bottom-32 -left-32 w-[500px] h-[500px] bg-pasture/10 rounded-full blur-3xl pointer-events-none"></div>
+  <!-- Dark gradient for text readability -->
+  <div class="absolute inset-0 bg-gradient-to-b from-black/30 via-black/40 to-black/70 pointer-events-none"></div>
 
-  <!-- Text content below the banner -->
-  <div class="relative max-w-5xl mx-auto px-5 md:px-8 pt-16 md:pt-24 pb-20 md:pb-28 text-center">
-    <div class="reveal inline-flex items-center gap-2 bg-white/80 backdrop-blur border border-black/5 rounded-full px-4 py-1.5 text-[13px] font-medium text-pasture mb-6">
+  <!-- Overlay content -->
+  <div class="relative max-w-5xl mx-auto px-5 md:px-8 py-20 md:py-28 text-center text-white">
+    <div class="reveal inline-flex items-center gap-2 bg-white/15 backdrop-blur border border-white/25 rounded-full px-4 py-1.5 text-[13px] font-medium text-white mb-6">
       <span class="w-1.5 h-1.5 rounded-full bg-gold"></span>
       Family-owned since 1996
     </div>
 
-    <h1 class="reveal font-sans font-bold text-[clamp(2.5rem,6vw,5rem)] leading-[1.05] tracking-tight text-pasture">
+    <h1 class="reveal font-sans font-bold text-[clamp(2.5rem,6vw,5rem)] leading-[1.05] tracking-tight text-white drop-shadow-lg">
       Real beef. Raised right.<br />
       <span class="text-gold">Shipped to your door.</span>
     </h1>
 
-    <p class="reveal mt-6 text-[17px] md:text-[20px] text-ink-muted max-w-2xl mx-auto leading-relaxed">
+    <p class="reveal mt-6 text-[17px] md:text-[20px] text-white/90 max-w-2xl mx-auto leading-relaxed drop-shadow">
       100% grass-fed, grass-finished beef and pasture-raised pork — vacuum-sealed, flash-frozen, delivered nationwide. The way meat used to taste.
     </p>
 
     <div class="reveal mt-8 flex flex-col sm:flex-row gap-3 justify-center">
       <a
         href="#order"
-        class="inline-flex items-center justify-center bg-pasture text-white font-semibold px-7 py-4 rounded-full hover:bg-pasture-dark transition shadow-lg shadow-pasture/20"
+        class="inline-flex items-center justify-center bg-pasture text-white font-semibold px-7 py-4 rounded-full hover:bg-pasture-dark transition shadow-lg shadow-black/30"
       >
         Order Now
       </a>
       <a
         href="#shop"
-        class="inline-flex items-center justify-center bg-white/80 backdrop-blur border border-black/10 text-pasture font-semibold px-7 py-4 rounded-full hover:bg-white transition"
+        class="inline-flex items-center justify-center bg-white/15 backdrop-blur border border-white/30 text-white font-semibold px-7 py-4 rounded-full hover:bg-white/25 transition"
       >
         See the cuts →
       </a>
     </div>
 
-    <!-- Trust row -->
-    <div class="reveal mt-14 grid grid-cols-3 gap-6 max-w-2xl mx-auto">
-      <div>
-        <div class="text-3xl md:text-4xl font-bold text-pasture">100%</div>
-        <div class="text-[13px] md:text-[14px] text-ink-muted leading-tight mt-1">Grass-fed &amp; finished</div>
+    <!-- Trust row (overlaid) -->
+    <div class="reveal mt-14 grid md:grid-cols-3 gap-5 md:gap-6 max-w-4xl mx-auto text-left">
+      <div class="bg-white/10 backdrop-blur-md border border-white/20 rounded-2xl p-5 md:p-6">
+        <div class="w-11 h-11 rounded-xl bg-white/20 flex items-center justify-center mb-3">
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" class="text-gold" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M11 20A7 7 0 0 1 9.8 6.1C15.5 5 17 4.48 19 2c1 2 2 4.18 2 8 0 5.5-4.78 10-10 10Z"/><path d="M2 21c0-3 1.85-5.36 5.08-6"/></svg>
+        </div>
+        <h3 class="font-semibold text-[16px] md:text-[17px] text-white mb-1.5">100% Grass-Fed &amp; Grass-Finished</h3>
+        <p class="text-white/80 text-[13.5px] md:text-[14px] leading-relaxed">Birth to harvest — no grain, no corn, no feedlot.</p>
       </div>
-      <div>
-        <div class="text-3xl md:text-4xl font-bold text-pasture">30+</div>
-        <div class="text-[13px] md:text-[14px] text-ink-muted leading-tight mt-1">Years family-owned</div>
+
+      <div class="bg-white/10 backdrop-blur-md border border-white/20 rounded-2xl p-5 md:p-6">
+        <div class="w-11 h-11 rounded-xl bg-white/20 flex items-center justify-center mb-3">
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" class="text-gold" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m3 9 9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg>
+        </div>
+        <h3 class="font-semibold text-[16px] md:text-[17px] text-white mb-1.5">Family-Owned &amp; Operated</h3>
+        <p class="text-white/80 text-[13.5px] md:text-[14px] leading-relaxed">Same land, same family, same approach since 1996.</p>
       </div>
-      <div>
-        <div class="text-3xl md:text-4xl font-bold text-pasture">50</div>
-        <div class="text-[13px] md:text-[14px] text-ink-muted leading-tight mt-1">States shipped</div>
+
+      <div class="bg-white/10 backdrop-blur-md border border-white/20 rounded-2xl p-5 md:p-6">
+        <div class="w-11 h-11 rounded-xl bg-white/20 flex items-center justify-center mb-3">
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" class="text-gold" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 18V6a2 2 0 0 0-2-2H4a2 2 0 0 0-2 2v11a1 1 0 0 0 1 1h2"/><path d="M15 18H9"/><path d="M19 18h2a1 1 0 0 0 1-1v-3.65a1 1 0 0 0-.22-.624l-3.48-4.35A1 1 0 0 0 17.52 8H14"/><circle cx="17" cy="18" r="2"/><circle cx="7" cy="18" r="2"/></svg>
+        </div>
+        <h3 class="font-semibold text-[16px] md:text-[17px] text-white mb-1.5">Shipped Nationwide, Vacuum-Sealed</h3>
+        <p class="text-white/80 text-[13.5px] md:text-[14px] leading-relaxed">Insulated, flash-frozen, arrives in 2–5 business days.</p>
       </div>
     </div>
   </div>

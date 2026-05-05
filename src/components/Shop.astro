@@ -18,7 +18,12 @@ import { products } from "../data/products";
     <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5 md:gap-7">
       {products.map((p) => (
         <article class="reveal group bg-white rounded-3xl overflow-hidden ring-1 ring-black/5 hover:ring-pasture/20 hover:shadow-2xl hover:shadow-pasture/10 transition-all duration-500 flex flex-col">
-          <div class="aspect-square bg-surface-soft relative overflow-hidden">
+          <button
+            type="button"
+            data-product-trigger={p.slug}
+            class="aspect-square bg-surface-soft relative overflow-hidden cursor-pointer text-left"
+            aria-label={`View what's inside the ${p.name}`}
+          >
             {p.image ? (
               <Image
                 src={p.image}
@@ -35,12 +40,17 @@ import { products } from "../data/products";
                 </div>
               </div>
             )}
+            {p.badge && (
+              <div class="absolute top-4 left-4 bg-gold text-pasture text-[11px] font-bold uppercase tracking-wider px-3 py-1 rounded-full shadow">
+                {p.badge}
+              </div>
+            )}
             {!p.available && (
               <div class="absolute top-4 right-4 bg-white/90 backdrop-blur text-pasture text-[11px] font-semibold uppercase tracking-wider px-3 py-1 rounded-full ring-1 ring-black/5">
                 Coming soon
               </div>
             )}
-          </div>
+          </button>
           <div class="p-6 md:p-7 flex-1 flex flex-col">
             <div class="flex items-baseline justify-between mb-2 gap-3">
               <h3 class="font-sans font-bold text-[22px] text-ink">{p.name}</h3>
@@ -48,16 +58,174 @@ import { products } from "../data/products";
             </div>
             <div class="text-[13px] text-ink-muted mb-4">{p.weight}</div>
             <p class="text-[15px] text-ink-muted leading-relaxed flex-1">{p.shortDesc}</p>
-            <a
-              href="#order"
-              class="mt-6 inline-flex items-center justify-center font-semibold text-[14px] text-pasture hover:text-gold transition group/cta"
-            >
-              {p.available ? "Order this share" : "Notify me"}
-              <span class="ml-1 group-hover/cta:translate-x-1 transition-transform">→</span>
-            </a>
+
+            <div class="mt-6 flex flex-col sm:flex-row sm:items-center sm:justify-between gap-3">
+              <button
+                type="button"
+                data-product-trigger={p.slug}
+                class="inline-flex items-center font-semibold text-[14px] text-pasture hover:text-gold transition group/cta self-start"
+              >
+                What's inside
+                <span class="ml-1 group-hover/cta:translate-x-1 transition-transform">→</span>
+              </button>
+              <a
+                href="#order"
+                class="inline-flex items-center justify-center bg-pasture text-white font-semibold text-[13px] px-4 py-2 rounded-full hover:bg-pasture-dark transition self-start sm:self-auto"
+              >
+                {p.available ? "Order this share" : "Notify me"}
+              </a>
+            </div>
           </div>
         </article>
       ))}
     </div>
   </div>
+
+  <!-- Product detail dialogs (one per product) -->
+  {products.map((p) => (
+    <dialog
+      id={`dialog-${p.slug}`}
+      class="product-dialog rounded-3xl p-0 max-w-2xl w-[92vw] backdrop:bg-black/60 backdrop:backdrop-blur-sm"
+    >
+      <div class="relative bg-white rounded-3xl overflow-hidden">
+        <button
+          type="button"
+          data-product-close
+          aria-label="Close"
+          class="absolute top-4 right-4 z-10 w-10 h-10 rounded-full bg-white/90 backdrop-blur ring-1 ring-black/10 flex items-center justify-center text-ink hover:bg-white hover:scale-105 transition"
+        >
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+        </button>
+
+        {p.image && (
+          <div class="aspect-[16/9] bg-surface-soft overflow-hidden">
+            <Image
+              src={p.image}
+              alt={`${p.name} — 100% grass fed beef from Coopers`}
+              class="w-full h-full object-cover"
+              widths={[600, 900, 1200]}
+              sizes="(max-width: 640px) 92vw, 700px"
+            />
+          </div>
+        )}
+
+        <div class="p-7 md:p-9 max-h-[60vh] overflow-y-auto">
+          {p.badge && (
+            <div class="inline-block bg-gold/15 text-pasture-dark text-[11px] font-bold uppercase tracking-wider px-3 py-1 rounded-full mb-3">
+              {p.badge}
+            </div>
+          )}
+
+          <div class="flex items-baseline justify-between gap-4 mb-4">
+            <h3 class="font-sans font-bold text-[26px] md:text-[30px] text-pasture leading-tight">{p.name}</h3>
+            <div class="text-pasture font-bold text-[22px] md:text-[24px] whitespace-nowrap">{p.price}</div>
+          </div>
+
+          {(p.hangingWeight || p.packagedYield) && (
+            <dl class="grid grid-cols-2 gap-3 mb-5 text-[14px]">
+              {p.hangingWeight && (
+                <div class="bg-surface-soft rounded-xl px-4 py-3">
+                  <dt class="text-[11px] uppercase tracking-wider font-semibold text-ink-muted mb-0.5">Hanging Weight</dt>
+                  <dd class="font-semibold text-ink">{p.hangingWeight}</dd>
+                </div>
+              )}
+              {p.packagedYield && (
+                <div class="bg-surface-soft rounded-xl px-4 py-3">
+                  <dt class="text-[11px] uppercase tracking-wider font-semibold text-ink-muted mb-0.5">Packaged Yield</dt>
+                  <dd class="font-semibold text-ink">{p.packagedYield}</dd>
+                </div>
+              )}
+            </dl>
+          )}
+
+          {p.note && (
+            <p class="text-[15px] text-ink-muted leading-relaxed mb-5">{p.note}</p>
+          )}
+
+          {p.cuts && p.cuts.length > 0 && (
+            <>
+              <h4 class="text-[13px] font-semibold uppercase tracking-[0.16em] text-gold mb-3">What's Inside</h4>
+              <ul class="space-y-2 mb-5">
+                {p.cuts.map((cut) => (
+                  <li class="flex gap-2 text-[15px] text-ink leading-relaxed">
+                    <span class="text-gold flex-shrink-0 mt-1">•</span>
+                    <span>{cut}</span>
+                  </li>
+                ))}
+              </ul>
+            </>
+          )}
+
+          {p.plus && (
+            <p class="text-[14px] text-ink-muted italic leading-relaxed mb-5">{p.plus}</p>
+          )}
+
+          {p.longDesc && !p.cuts && (
+            <p class="text-[15px] text-ink-muted leading-relaxed mb-5">{p.longDesc}</p>
+          )}
+
+          <div class="pt-4 border-t border-black/5 flex flex-col sm:flex-row gap-3">
+            <a
+              href="#order"
+              data-product-close
+              class="inline-flex items-center justify-center bg-pasture text-white font-semibold px-6 py-3 rounded-full hover:bg-pasture-dark transition flex-1"
+            >
+              {p.available ? "Order this share" : "Notify me"}
+            </a>
+            <button
+              type="button"
+              data-product-close
+              class="inline-flex items-center justify-center bg-surface-soft text-pasture font-semibold px-6 py-3 rounded-full hover:bg-black/5 transition"
+            >
+              Close
+            </button>
+          </div>
+        </div>
+      </div>
+    </dialog>
+  ))}
 </section>
+
+<script>
+  document.addEventListener("click", (e) => {
+    const target = e.target as HTMLElement;
+    const trigger = target.closest("[data-product-trigger]");
+    if (trigger) {
+      const slug = trigger.getAttribute("data-product-trigger");
+      const dlg = document.getElementById(`dialog-${slug}`) as HTMLDialogElement | null;
+      if (dlg && typeof dlg.showModal === "function") {
+        dlg.showModal();
+      }
+      return;
+    }
+
+    const closer = target.closest("[data-product-close]");
+    if (closer) {
+      const dlg = closer.closest("dialog") as HTMLDialogElement | null;
+      if (dlg) dlg.close();
+      return;
+    }
+
+    // Click on dialog backdrop closes it
+    if (target.tagName === "DIALOG") {
+      (target as HTMLDialogElement).close();
+    }
+  });
+</script>
+
+<style>
+  .product-dialog::backdrop {
+    animation: fadeIn 0.25s ease-out;
+  }
+  .product-dialog[open] {
+    animation: dialogIn 0.3s cubic-bezier(0.22, 1, 0.36, 1);
+  }
+  @keyframes fadeIn {
+    from { opacity: 0; }
+    to { opacity: 1; }
+  }
+  @keyframes dialogIn {
+    from { opacity: 0; transform: translateY(20px) scale(0.97); }
+    to { opacity: 1; transform: translateY(0) scale(1); }
+  }
+</style>
