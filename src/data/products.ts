@@ -33,11 +33,11 @@ export const products: Product[] = [
   {
     slug: "full-beef",
     name: "Full Beef",
-    price: "$3,500",
-    weight: "~550 lbs packaged",
+    price: "$2,800",
+    weight: "~750–800 lbs packaged",
     shortDesc: "Whole-animal share. Feeds a family for the year.",
-    hangingWeight: "600–700 lbs",
-    packagedYield: "550 lbs",
+    hangingWeight: "900–1,100 lbs",
+    packagedYield: "750–800 lbs",
     note: "Double everything in the ½ Beef. Ideal for large families or long-term storage.",
     cuts: [
       "Ribeye Steaks: 25–40+ steaks",
@@ -61,12 +61,12 @@ export const products: Product[] = [
   {
     slug: "half-beef",
     name: "1/2 Beef",
-    price: "$2,200",
-    weight: "~150–230 lbs packaged",
+    price: "$1,500",
+    weight: "~300–350 lbs packaged",
     shortDesc: "Half-animal share. The most popular size.",
     badge: "Most Popular",
-    hangingWeight: "~275–350 lbs",
-    packagedYield: "~150–230 lbs",
+    hangingWeight: "450–550 lbs",
+    packagedYield: "300–350 lbs",
     cuts: [
       "Ribeye Steaks: 12–20 steaks (¾–1¼” thick)",
       "NY Strip Steaks: 10–16 steaks",
