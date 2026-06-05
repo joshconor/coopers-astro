@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://coopersgrassfedbeef.com/sitemap-index.xml
