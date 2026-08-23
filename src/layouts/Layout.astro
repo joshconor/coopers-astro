@@ -6,12 +6,18 @@ import Footer from "../components/Footer.astro";
 interface Props {
   title?: string;
   description?: string;
+  noindex?: boolean;
 }
 
 const {
   title = "Coopers Grass Fed Beef — Shipped Nationwide from Amarillo, TX",
   description = "100% grass-fed, grass-finished beef and pasture-raised pork shares. Family-owned since 1996. Vacuum-sealed, flash-frozen, shipped nationwide from Amarillo, TX.",
+  noindex = false,
 } = Astro.props;
+
+// Tracking IDs live in src/config/analytics.ts — paste them there.
+import { ADS_ID, GA_ID } from "../config/analytics";
+const TAG_IDS = [ADS_ID, GA_ID].filter(Boolean);
 ---
 
 <!doctype html>
@@ -23,6 +29,24 @@ const {
     <meta name="theme-color" content="#355E3B" />
     <link rel="icon" type="image/png" href="/favicon.png" />
     <meta name="generator" content={Astro.generator} />
+    {noindex && <meta name="robots" content="noindex" />}
+
+    {
+      TAG_IDS.length > 0 && (
+        <>
+          <script is:inline async src={`https://www.googletagmanager.com/gtag/js?id=${TAG_IDS[0]}`} />
+          <script is:inline define:vars={{ TAG_IDS }}>
+            window.dataLayer = window.dataLayer || [];
+            function gtag() {
+              dataLayer.push(arguments);
+            }
+            window.gtag = gtag;
+            gtag("js", new Date());
+            TAG_IDS.forEach((id) => gtag("config", id));
+          </script>
+        </>
+      )
+    }
 
     <!-- Open Graph (Facebook, iMessage, WhatsApp, Slack link previews) -->
     <meta property="og:type" content="website" />

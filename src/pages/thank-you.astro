@@ -1,0 +1,59 @@
+---
+import Layout from "../layouts/Layout.astro";
+import { ADS_ID, ADS_CONVERSION_LABEL, GA_ID } from "../config/analytics";
+
+// Full "send_to" target for the Google Ads conversion event,
+// e.g. "AW-123456789/AbC-D_efGhIjKlMnOp". Empty until both IDs are pasted.
+const ADS_SEND_TO =
+  ADS_ID && ADS_CONVERSION_LABEL ? `${ADS_ID}/${ADS_CONVERSION_LABEL}` : "";
+---
+
+<Layout
+  title="Thank You — Coopers Grass Fed Beef"
+  description="Your order inquiry has been received. We'll reply within 1 hour during business hours with payment instructions."
+  noindex
+>
+  <section class="min-h-[70vh] flex items-center bg-pasture relative overflow-hidden">
+    <div class="absolute -top-40 -right-40 w-[600px] h-[600px] bg-gold/15 rounded-full blur-3xl pointer-events-none"></div>
+    <div class="absolute -bottom-40 -left-40 w-[500px] h-[500px] bg-white/5 rounded-full blur-3xl pointer-events-none"></div>
+
+    <div class="relative max-w-2xl mx-auto px-5 md:px-8 py-24 md:py-32 text-center">
+      <div class="mx-auto mb-8 w-20 h-20 rounded-full bg-white flex items-center justify-center shadow-2xl shadow-black/20">
+        <svg class="w-10 h-10 text-pasture" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5">
+          <path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7" />
+        </svg>
+      </div>
+      <div class="text-[13px] font-semibold uppercase tracking-[0.18em] text-gold mb-3">Order Inquiry Received</div>
+      <h1 class="font-sans font-bold text-[clamp(2rem,4.5vw,3.5rem)] tracking-tight text-white leading-[1.05]">
+        Thank you!
+      </h1>
+      <p class="mt-5 text-[17px] text-white/75 leading-relaxed">
+        We got your order inquiry. We'll reply within 1 hour during business
+        hours with payment instructions for your selected method.
+      </p>
+      <a
+        href="/"
+        class="inline-block mt-10 bg-white text-pasture font-semibold px-8 py-4 rounded-full hover:bg-gold hover:text-ink transition shadow-lg shadow-black/20"
+      >
+        Back to Home
+      </a>
+    </div>
+  </section>
+</Layout>
+
+<script is:inline define:vars={{ ADS_SEND_TO, GA_ID }}>
+  if (typeof window.gtag === "function") {
+    // Google Ads conversion — counts this visit as a lead from the ad click.
+    if (ADS_SEND_TO) {
+      window.gtag("event", "conversion", { send_to: ADS_SEND_TO });
+    }
+    // GA4 lead event. Sent only to the GA property, so it can never be
+    // mistaken for a second Google Ads conversion.
+    if (GA_ID) {
+      window.gtag("event", "generate_lead", {
+        send_to: GA_ID,
+        form_name: "order_inquiry",
+      });
+    }
+  }
+</script>
