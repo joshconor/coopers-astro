@@ -24,13 +24,8 @@ const TAG_IDS = [ADS_ID, GA_ID].filter(Boolean);
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
-    <meta name="description" content={description} />
-    <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <meta name="theme-color" content="#355E3B" />
-    <link rel="icon" type="image/png" href="/favicon.png" />
-    <meta name="generator" content={Astro.generator} />
-    {noindex && <meta name="robots" content="noindex" />}
 
+    {/* Google tag (gtag.js) — site-wide, loads on every page. */}
     {
       TAG_IDS.length > 0 && (
         <>
@@ -47,6 +42,13 @@ const TAG_IDS = [ADS_ID, GA_ID].filter(Boolean);
         </>
       )
     }
+
+    <meta name="description" content={description} />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="theme-color" content="#355E3B" />
+    <link rel="icon" type="image/png" href="/favicon.png" />
+    <meta name="generator" content={Astro.generator} />
+    {noindex && <meta name="robots" content="noindex" />}
 
     <!-- Open Graph (Facebook, iMessage, WhatsApp, Slack link previews) -->
     <meta property="og:type" content="website" />

@@ -3,7 +3,7 @@
 
 // Google Ads conversion ID — starts with "AW-", e.g. "AW-123456789".
 // Find it in the tag setup screen after you create a conversion action.
-export const ADS_ID = "";
+export const ADS_ID = "AW-18365263054";
 
 // Google Ads conversion label — the code AFTER the slash in the event
 // snippet's send_to line, e.g. "AbC-D_efGhIjKlMnOp". Just the label, no slash.
