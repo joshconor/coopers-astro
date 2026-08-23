@@ -1,6 +1,11 @@
 ---
 import Layout from "../layouts/Layout.astro";
-import { ADS_ID, ADS_CONVERSION_LABEL, GA_ID } from "../config/analytics";
+import {
+  ADS_ID,
+  ADS_CONVERSION_LABEL,
+  GA_ID,
+  GA_CONVERSION_EVENT,
+} from "../config/analytics";
 
 // Full "send_to" target for the Google Ads conversion event,
 // e.g. "AW-123456789/AbC-D_efGhIjKlMnOp". Empty until both IDs are pasted.
@@ -41,16 +46,18 @@ const ADS_SEND_TO =
   </section>
 </Layout>
 
-<script is:inline define:vars={{ ADS_SEND_TO, GA_ID }}>
+<script is:inline define:vars={{ ADS_SEND_TO, GA_ID, GA_CONVERSION_EVENT }}>
   if (typeof window.gtag === "function") {
-    // Google Ads conversion — counts this visit as a lead from the ad click.
+    // Native Google Ads conversion — only when a conversion action was
+    // created directly in Ads and has its own label.
     if (ADS_SEND_TO) {
       window.gtag("event", "conversion", { send_to: ADS_SEND_TO });
     }
-    // GA4 lead event. Sent only to the GA property, so it can never be
-    // mistaken for a second Google Ads conversion.
+    // GA4 key event. This is the path a GA4-imported Ads conversion uses:
+    // GA4 receives it, then forwards it to Ads via the linked accounts.
+    // send_to targets the GA property so Ads never double-counts it.
     if (GA_ID) {
-      window.gtag("event", "generate_lead", {
+      window.gtag("event", GA_CONVERSION_EVENT, {
         send_to: GA_ID,
         form_name: "order_inquiry",
       });
