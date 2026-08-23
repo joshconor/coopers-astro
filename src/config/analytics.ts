@@ -8,7 +8,7 @@ export const ADS_ID = "AW-18365263054";
 // Google Ads conversion label — ONLY for a conversion action created
 // directly in Google Ads ("Google tag" source). Leave empty when the
 // conversion action is imported from GA4 — GA_ID below handles that path.
-export const ADS_CONVERSION_LABEL = "";
+export const ADS_CONVERSION_LABEL = "S_K3COXSwOYcEM7ZnrVE";
 
 // Google Analytics 4 Measurement ID — starts with "G-".
 // REQUIRED when the Google Ads conversion action is imported from GA4:
