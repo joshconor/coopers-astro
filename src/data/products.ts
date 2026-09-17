@@ -17,6 +17,8 @@ export type Product = {
   hangingWeight?: string;
   /** Expected packaged yield, e.g. "150–230 lbs" */
   packagedYield?: string;
+  /** Freezer space needed, e.g. "about 6–7 cu ft" */
+  freezerSpace?: string;
   /** A 1–2 line note shown above the cut list in the modal */
   note?: string;
   /** Itemized list of cuts shown as bullets in the modal */
@@ -38,6 +40,7 @@ export const products: Product[] = [
     shortDesc: "Whole-animal share. Feeds a family for the year.",
     hangingWeight: "900–1,100 lbs",
     packagedYield: "750–800 lbs",
+    freezerSpace: "about 12–14 cu ft",
     note: "Double everything in the ½ Beef. Ideal for large families or long-term storage.",
     cuts: [
       "Ribeye Steaks: 25–40+ steaks",
@@ -67,6 +70,7 @@ export const products: Product[] = [
     badge: "Most Popular",
     hangingWeight: "450–550 lbs",
     packagedYield: "300–350 lbs",
+    freezerSpace: "about 6–7 cu ft",
     cuts: [
       "Ribeye Steaks: 12–20 steaks (¾–1¼” thick)",
       "NY Strip Steaks: 10–16 steaks",
@@ -94,6 +98,7 @@ export const products: Product[] = [
     shortDesc: "Quarter share. Roughly six months of dinner.",
     hangingWeight: "300–350 lbs",
     packagedYield: "200–230 lbs",
+    freezerSpace: "about 3–4 cu ft",
     note: "Roughly half of a ½ beef (proportional share).",
     cuts: [
       "Ribeye Steaks: 6–10 steaks",
@@ -122,6 +127,7 @@ export const products: Product[] = [
     shortDesc: "Smallest share. Fits in most fridge-top freezers.",
     hangingWeight: "80–90 lbs",
     packagedYield: "50–60 lbs",
+    freezerSpace: "about 2 cu ft",
     note: "Great entry size for trying grass-fed beef.",
     cuts: [
       "Ribeye Steaks: 3–6 steaks",
@@ -147,6 +153,9 @@ export const products: Product[] = [
     price: "$900",
     weight: "~120–160 lbs",
     shortDesc: "Whole pasture-raised pork share. Cut to your specifications.",
+    hangingWeight: "180–220 lbs",
+    packagedYield: "120–160 lbs",
+    freezerSpace: "about 3–4 cu ft",
     longDesc:
       "Approximately 120–160 lbs of pasture-raised pork, vacuum-sealed and flash-frozen. Includes pork chops, bacon, ham, pork shoulder, ribs, sausage, ground pork, tenderloin, and lard. Cut to your specifications. Whole-animal share — perfect for families filling a freezer for the year.",
     image: pigCuts,
@@ -158,6 +167,9 @@ export const products: Product[] = [
     price: "$500",
     weight: "~60–80 lbs",
     shortDesc: "Half pasture-raised pork share. Premium pork without the full hog.",
+    hangingWeight: "90–110 lbs",
+    packagedYield: "60–80 lbs",
+    freezerSpace: "about 1–2 cu ft",
     longDesc:
       "Approximately 60–80 lbs of pasture-raised pork. Includes pork chops, bacon, ham, pork shoulder, ribs, sausage, ground pork, and tenderloin. Half-share for the family that wants premium pork without committing to a full hog.",
     image: pigCuts,

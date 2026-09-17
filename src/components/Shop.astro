@@ -53,11 +53,33 @@ import { products } from "../data/products";
           </button>
           <div class="p-6 md:p-7 flex-1 flex flex-col">
             <div class="flex items-baseline justify-between mb-2 gap-3">
-              <h3 class="font-sans font-bold text-[22px] text-ink">{p.name}</h3>
-              <div class="text-pasture font-bold text-[20px] whitespace-nowrap">{p.price}</div>
+              <h3 class="font-display font-bold text-[26px] md:text-[28px] text-pasture leading-tight">{p.name}</h3>
+              <div class="text-pasture font-bold text-[22px] whitespace-nowrap">{p.price}</div>
             </div>
-            <div class="text-[13px] text-ink-muted mb-4">{p.weight}</div>
-            <p class="text-[15px] text-ink-muted leading-relaxed flex-1">{p.shortDesc}</p>
+            <p class="text-[15px] md:text-[16px] text-ink-muted leading-relaxed">{p.shortDesc}</p>
+
+            {(p.hangingWeight || p.packagedYield || p.freezerSpace) && (
+              <ul class="mt-5 border-t border-black/5 divide-y divide-black/5 text-[14px]">
+                {p.hangingWeight && (
+                  <li class="flex justify-between items-baseline py-2.5">
+                    <span class="text-ink-muted">Hanging weight</span>
+                    <strong class="font-semibold text-ink">{p.hangingWeight}</strong>
+                  </li>
+                )}
+                {p.packagedYield && (
+                  <li class="flex justify-between items-baseline py-2.5">
+                    <span class="text-ink-muted">Packaged yield</span>
+                    <strong class="font-semibold text-ink">{p.packagedYield}</strong>
+                  </li>
+                )}
+                {p.freezerSpace && (
+                  <li class="flex justify-between items-baseline py-2.5">
+                    <span class="text-ink-muted">Freezer space</span>
+                    <strong class="font-semibold text-ink">{p.freezerSpace}</strong>
+                  </li>
+                )}
+              </ul>
+            )}
 
             <div class="mt-6 flex flex-col sm:flex-row gap-3">
               <button
@@ -77,6 +99,21 @@ import { products } from "../data/products";
           </div>
         </article>
       ))}
+    </div>
+
+    <div class="reveal mt-10 md:mt-14 grid md:grid-cols-2 gap-5 max-w-4xl">
+      <div class="bg-white rounded-2xl p-6 md:p-7 ring-1 ring-black/5">
+        <h3 class="font-display font-bold text-[20px] text-pasture mb-2">How much freezer do I need?</h3>
+        <p class="text-[15px] text-ink-muted leading-relaxed">
+          Roughly one cubic foot per 35–40 lbs of vacuum-packed beef. A small chest freezer holds a 1/4 share easily; a standard chest freezer takes a full half with room to spare.
+        </p>
+      </div>
+      <div class="bg-white rounded-2xl p-6 md:p-7 ring-1 ring-black/5">
+        <h3 class="font-display font-bold text-[20px] text-pasture mb-2">Cut to your specifications</h3>
+        <p class="text-[15px] text-ink-muted leading-relaxed">
+          After you reserve, we walk you through the butcher's cut sheet — steak thickness, roast sizes, how much you want ground. Your freezer gets packed the way you want it.
+        </p>
+      </div>
     </div>
   </div>
 
@@ -120,8 +157,8 @@ import { products } from "../data/products";
             <div class="text-pasture font-bold text-[22px] md:text-[24px] whitespace-nowrap">{p.price}</div>
           </div>
 
-          {(p.hangingWeight || p.packagedYield) && (
-            <dl class="grid grid-cols-2 gap-3 mb-5 text-[14px]">
+          {(p.hangingWeight || p.packagedYield || p.freezerSpace) && (
+            <dl class="grid grid-cols-2 sm:grid-cols-3 gap-3 mb-5 text-[14px]">
               {p.hangingWeight && (
                 <div class="bg-surface-soft rounded-xl px-4 py-3">
                   <dt class="text-[11px] uppercase tracking-wider font-semibold text-ink-muted mb-0.5">Hanging Weight</dt>
@@ -132,6 +169,12 @@ import { products } from "../data/products";
                 <div class="bg-surface-soft rounded-xl px-4 py-3">
                   <dt class="text-[11px] uppercase tracking-wider font-semibold text-ink-muted mb-0.5">Packaged Yield</dt>
                   <dd class="font-semibold text-ink">{p.packagedYield}</dd>
+                </div>
+              )}
+              {p.freezerSpace && (
+                <div class="bg-surface-soft rounded-xl px-4 py-3">
+                  <dt class="text-[11px] uppercase tracking-wider font-semibold text-ink-muted mb-0.5">Freezer Space</dt>
+                  <dd class="font-semibold text-ink">{p.freezerSpace}</dd>
                 </div>
               )}
             </dl>
