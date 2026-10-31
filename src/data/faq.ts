@@ -29,7 +29,7 @@ export const faq = [
   },
   {
     q: "How does payment work, step-by-step?",
-    a: "1) Pick your share and submit the order form (it asks which payment app you prefer: Zelle, Cash App, Apple Pay, or Cash). 2) We reply with the payment details for the method you chose. 3) You send the deposit (and balance, if you're paying in full). 4) The moment payment confirms, we schedule shipping right away.",
+    a: "1) Pick your share and submit the order form (it asks which payment app you prefer: Zelle, Cash App, Apple Pay, or Cash). 2) We reply with the payment details for the method you chose. 3) You send the deposit (and balance, if you're paying in full). 4) The moment payment confirms, we schedule shipping right away. Prefer to pay in full by card? Use the \"Buy now\" button on any share for secure checkout through Stripe.",
   },
   {
     q: "Do you ship to Hawaii, Alaska, or every zip code?",

@@ -96,6 +96,17 @@ import { products } from "../data/products";
                 {p.available ? "Order this share" : "Notify me"}
               </a>
             </div>
+            {p.available && p.buyUrl && (
+              <a
+                href={p.buyUrl}
+                class="mt-3 inline-flex items-center justify-center bg-gold text-pasture font-bold text-[14px] px-4 py-2.5 rounded-full hover:brightness-95 transition w-full"
+              >
+                Buy now — {p.price}
+              </a>
+            )}
+            <a href={`/shares/${p.slug}`} class="mt-3 text-center text-[12px] text-ink-muted underline underline-offset-2 hover:text-pasture">
+              Full details
+            </a>
           </div>
         </article>
       ))}
@@ -207,6 +218,14 @@ import { products } from "../data/products";
           )}
 
           <div class="pt-4 border-t border-black/5 flex flex-col sm:flex-row gap-3">
+            {p.available && p.buyUrl && (
+              <a
+                href={p.buyUrl}
+                class="inline-flex items-center justify-center bg-gold text-pasture font-bold px-6 py-3 rounded-full hover:brightness-95 transition flex-1"
+              >
+                Buy now — {p.price}
+              </a>
+            )}
             <a
               href="#order"
               data-product-close

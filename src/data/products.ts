@@ -27,6 +27,13 @@ export type Product = {
   plus?: string;
   /** Fallback long description for products without a structured breakdown (e.g. pigs) */
   longDesc?: string;
+  /**
+   * Stripe Payment Link for this share (e.g. "https://buy.stripe.com/...").
+   * When set, a "Buy now" button appears on the card, in the "What's inside"
+   * popup and on the product's own page (/shares/<slug>). Leave "" to hide it.
+   * The Stripe price must match `price` above (Google Merchant Center checks this).
+   */
+  buyUrl: string;
   image: ImageMetadata | null;
   available: boolean;
 };
@@ -59,6 +66,7 @@ export const products: Product[] = [
     ],
     plus: "Plus: All ribs, bones, tallow, and optional organs.",
     image: fullBeef,
+    buyUrl: "https://buy.stripe.com/cNi7sKbDF6oZeIx5f60x203",
     available: true,
   },
   {
@@ -88,6 +96,7 @@ export const products: Product[] = [
     ],
     plus: "Plus: Short ribs, soup bones, tallow/suet, internal organs (liver, heart, tongue — optional), and trim as requested.",
     image: halfBeef,
+    buyUrl: "https://buy.stripe.com/aFadR83796oZashcHy0x202",
     available: true,
   },
   {
@@ -117,6 +126,7 @@ export const products: Product[] = [
     ],
     plus: "Plus: Short ribs, bones, tallow, and optional organs.",
     image: quarterBeef,
+    buyUrl: "https://buy.stripe.com/8x2cN4gXZfZzfMB8ri0x201",
     available: true,
   },
   {
@@ -145,6 +155,7 @@ export const products: Product[] = [
     ],
     plus: "Plus: Smaller amounts of ribs, bones, tallow, and optional organs.",
     image: eighthBeef,
+    buyUrl: "https://buy.stripe.com/aFaaEW7np7t3eIx8ri0x200",
     available: true,
   },
   {
@@ -159,6 +170,7 @@ export const products: Product[] = [
     longDesc:
       "Approximately 120–160 lbs of pasture-raised pork, vacuum-sealed and flash-frozen. Includes pork chops, bacon, ham, pork shoulder, ribs, sausage, ground pork, tenderloin, and lard. Cut to your specifications. Whole-animal share — perfect for families filling a freezer for the year.",
     image: pigCuts,
+    buyUrl: "https://buy.stripe.com/28E6oGbDF28J6c1ePG0x205",
     available: true,
   },
   {
@@ -173,6 +185,7 @@ export const products: Product[] = [
     longDesc:
       "Approximately 60–80 lbs of pasture-raised pork. Includes pork chops, bacon, ham, pork shoulder, ribs, sausage, ground pork, and tenderloin. Half-share for the family that wants premium pork without committing to a full hog.",
     image: pigCuts,
+    buyUrl: "https://buy.stripe.com/7sYbJ07np9Bb8k9cHy0x204",
     available: true,
   },
 ];
