@@ -66,7 +66,7 @@ export const products: Product[] = [
     ],
     plus: "Plus: All ribs, bones, tallow, and optional organs.",
     image: fullBeef,
-    buyUrl: "https://buy.stripe.com/cNi7sKbDF6oZeIx5f60x203",
+    buyUrl: "https://buy.stripe.com/28E5kF6Zv0XC2Nid1UdQQ00",
     available: true,
   },
   {
@@ -96,7 +96,7 @@ export const products: Product[] = [
     ],
     plus: "Plus: Short ribs, soup bones, tallow/suet, internal organs (liver, heart, tongue — optional), and trim as requested.",
     image: halfBeef,
-    buyUrl: "https://buy.stripe.com/aFadR83796oZashcHy0x202",
+    buyUrl: "https://buy.stripe.com/4gMbJ397D0XCew0aTMdQQ01",
     available: true,
   },
   {
@@ -126,7 +126,7 @@ export const products: Product[] = [
     ],
     plus: "Plus: Short ribs, bones, tallow, and optional organs.",
     image: quarterBeef,
-    buyUrl: "https://buy.stripe.com/8x2cN4gXZfZzfMB8ri0x201",
+    buyUrl: "https://buy.stripe.com/9B66oJ6Zv6hW3RmbXQdQQ02",
     available: true,
   },
   {
@@ -155,7 +155,7 @@ export const products: Product[] = [
     ],
     plus: "Plus: Smaller amounts of ribs, bones, tallow, and optional organs.",
     image: eighthBeef,
-    buyUrl: "https://buy.stripe.com/aFaaEW7np7t3eIx8ri0x200",
+    buyUrl: "https://buy.stripe.com/cNi6oJ97D21GdrW7HAdQQ04",
     available: true,
   },
   {
@@ -170,7 +170,7 @@ export const products: Product[] = [
     longDesc:
       "Approximately 120–160 lbs of pasture-raised pork, vacuum-sealed and flash-frozen. Includes pork chops, bacon, ham, pork shoulder, ribs, sausage, ground pork, tenderloin, and lard. Cut to your specifications. Whole-animal share — perfect for families filling a freezer for the year.",
     image: pigCuts,
-    buyUrl: "https://buy.stripe.com/28E6oGbDF28J6c1ePG0x205",
+    buyUrl: "https://buy.stripe.com/00w8wR97D7m0drW9PIdQQ03",
     available: true,
   },
   {
@@ -185,7 +185,7 @@ export const products: Product[] = [
     longDesc:
       "Approximately 60–80 lbs of pasture-raised pork. Includes pork chops, bacon, ham, pork shoulder, ribs, sausage, ground pork, and tenderloin. Half-share for the family that wants premium pork without committing to a full hog.",
     image: pigCuts,
-    buyUrl: "https://buy.stripe.com/7sYbJ07np9Bb8k9cHy0x204",
+    buyUrl: "https://buy.stripe.com/dRm5kFabHgWA1Je7HAdQQ05",
     available: true,
   },
 ];
