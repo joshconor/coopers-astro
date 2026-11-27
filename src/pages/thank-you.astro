@@ -113,6 +113,14 @@ const ADS_SEND_TO =
     }
   } catch (e) {}
 
+  // Nobody who lands here without a fresh receipt has sent an inquiry
+  // (Google Ads sometimes sends ad clicks straight to this page). Send
+  // them to the order form instead, keeping the ad's tracking parameters
+  // so a later real submission is still credited to the right click.
+  if (!receipt) {
+    window.location.replace("/" + window.location.search + "#order");
+  }
+
   if (receipt && typeof window.gtag === "function") {
     // Native Google Ads conversion — only when a conversion action was
     // created directly in Ads and has its own label. transaction_id lets
