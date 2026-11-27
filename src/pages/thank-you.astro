@@ -95,11 +95,33 @@ const ADS_SEND_TO =
 </Layout>
 
 <script is:inline define:vars={{ ADS_SEND_TO, GA_ID, GA_CONVERSION_EVENT }}>
-  if (typeof window.gtag === "function") {
+  // Only count a conversion when the order form left a fresh one-time
+  // receipt, which it does only after Formspree confirmed the submission.
+  // The receipt is removed right away, so refreshing this page, coming
+  // back to it later, or opening /thank-you/ directly never counts.
+  var RECEIPT_KEY = "coopers_order_receipt";
+  var RECEIPT_MAX_AGE_MS = 10 * 60 * 1000;
+  var receipt = null;
+  try {
+    var raw = sessionStorage.getItem(RECEIPT_KEY);
+    sessionStorage.removeItem(RECEIPT_KEY);
+    if (raw) {
+      var parsed = JSON.parse(raw);
+      if (parsed && parsed.id && Date.now() - parsed.at < RECEIPT_MAX_AGE_MS) {
+        receipt = parsed;
+      }
+    }
+  } catch (e) {}
+
+  if (receipt && typeof window.gtag === "function") {
     // Native Google Ads conversion — only when a conversion action was
-    // created directly in Ads and has its own label.
+    // created directly in Ads and has its own label. transaction_id lets
+    // Google Ads drop any duplicate of the same submission.
     if (ADS_SEND_TO) {
-      window.gtag("event", "conversion", { send_to: ADS_SEND_TO });
+      window.gtag("event", "conversion", {
+        send_to: ADS_SEND_TO,
+        transaction_id: receipt.id,
+      });
     }
     // GA4 key event. This is the path a GA4-imported Ads conversion uses:
     // GA4 receives it, then forwards it to Ads via the linked accounts.
@@ -108,6 +130,7 @@ const ADS_SEND_TO =
       window.gtag("event", GA_CONVERSION_EVENT, {
         send_to: GA_ID,
         form_name: "order_inquiry",
+        transaction_id: receipt.id,
       });
     }
   }

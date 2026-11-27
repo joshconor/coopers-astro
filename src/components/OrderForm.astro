@@ -100,7 +100,16 @@ import { products } from "../data/products";
 <script>
   // Submit to Formspree in the background so the visitor stays on our site,
   // then land them on /thank-you/ — the page that fires the Ads conversion.
+  //
+  // The Ads conversion only counts when /thank-you/ finds a one-time
+  // "receipt" this script leaves behind after Formspree confirms the
+  // submission. Direct visits, refreshes, back-button visits and bots
+  // that skip the form never count.
   const form = document.getElementById("order-form") as HTMLFormElement | null;
+  const RECEIPT_KEY = "coopers_order_receipt";
+  // Real people take longer than this to fill in a 10-field form.
+  const MIN_FILL_MS = 4000;
+  const shownAt = Date.now();
 
   form?.addEventListener("submit", async (e) => {
     e.preventDefault();
@@ -110,6 +119,12 @@ import { products } from "../data/products";
     button.disabled = true;
     button.textContent = "Sending…";
 
+    // Hidden honeypot field: humans never see it, spam bots fill it in.
+    // Formspree silently drops those but still answers "OK", so without
+    // this check a bot would still count as a Google Ads conversion.
+    const honeypot = (form.elements.namedItem("_gotcha") as HTMLInputElement | null)?.value;
+    const looksLikeBot = Boolean(honeypot) || Date.now() - shownAt < MIN_FILL_MS;
+
     try {
       const res = await fetch(form.action, {
         method: "POST",
@@ -117,6 +132,17 @@ import { products } from "../data/products";
         headers: { Accept: "application/json" },
       });
       if (!res.ok) throw new Error(`Formspree responded ${res.status}`);
+      const body = await res.json().catch(() => ({}));
+      if (body && body.ok === false) throw new Error("Formspree rejected the submission");
+
+      if (!looksLikeBot) {
+        try {
+          const id =
+            (crypto as any).randomUUID?.() ??
+            `${Date.now()}-${Math.random().toString(36).slice(2)}`;
+          sessionStorage.setItem(RECEIPT_KEY, JSON.stringify({ id, at: Date.now() }));
+        } catch {}
+      }
       window.location.href = "/thank-you/";
     } catch {
       errorEl.classList.remove("hidden");
